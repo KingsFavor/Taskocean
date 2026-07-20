@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#E9E8E5;font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#5B7CA8;text-decoration:none}
+  a:hover{color:#42618a}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#E9E8E5;padding:56px 60px 90px">
+<div style="max-width:1560px;margin:0 auto">
+
+  <!-- ===== TITLE ===== -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:0 0 50px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:17px">
+      <img src="taskocean-logo.png" alt="TaskOcean" style="height:44px;width:auto;display:block;flex:none">
+      <div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:31px;font-weight:700;letter-spacing:0;color:#1b1b1a;line-height:1">TaskOcean</div>
+        <div style="font-size:13px;font-weight:500;color:#94938f;margin-top:8px">macOS 항상-위 유틸리티 · 포스트잇 스타일 목업</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:20px;align-items:center;font-size:12.5px;font-weight:600;color:#7d7c78">
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>업무 계정</span>
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:16px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>개인 계정</span>
+      <span style="width:1px;height:15px;background:#d3d2ce"></span>
+      <span>1 direction · 9 states</span>
+    </div>
+  </div>
+
+  <!-- ================= 01 MAIN DAY VIEW ================= -->
+  <section style="margin:0 0 56px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">01</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">메인 하루 뷰</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">주 화면 — 오늘 할 일, 좌우로 하루 이동. 라이트 / 다크</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- ---- LIGHT EXPANDED (HERO) ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">라이트 · 확장 모드</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <!-- chrome -->
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+              <div title="창 모드" style="display:flex;background:#F4F3F0;border-radius:8px;padding:2px">
+                <span style="font-size:10px;font-weight:600;color:#a6a5a1;padding:3px 7px;border-radius:6px">미니</span>
+                <span style="font-size:10px;font-weight:600;color:#a6a5a1;padding:3px 7px;border-radius:6px">컴팩트</span>
+                <span style="font-size:10px;font-weight:700;color:#1b1b1a;background:#fff;padding:3px 7px;border-radius:6px;box-shadow:0 1px 2px rgba(20,20,20,.08)">확장</span>
+              </div>
+            </div>
+          </div>
+          <!-- date nav -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 16px 14px">
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#F4F3F0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#67665f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></svg></div>
+            <div style="text-align:center">
+              <div style="font-size:17px;font-weight:700;letter-spacing:-.01em">7월 15일 <span style="color:#a6a5a1;font-weight:600">화</span> <span style="font-size:11.5px;font-weight:700;color:#1b1b1a;background:#F1F0ED;padding:2px 8px;border-radius:7px;vertical-align:2px">오늘</span></div>
+            </div>
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#F4F3F0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#67665f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg></div>
+          </div>
+          <!-- filter row -->
+          <div style="display:flex;align-items:center;gap:8px;padding:0 15px 6px">
+            <div style="display:flex;align-items:center;gap:6px;background:#F4F3F0;border-radius:9px;padding:5px 9px 5px 10px;font-size:12.5px;font-weight:600;color:#4b4a45">전체 계정<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9b9b98" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+            <span style="width:22px;height:22px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:1.5px solid #fff;box-shadow:0 0 0 1px #e8e7e3" title="업무 · Workspace · jun@company.com">J</span>
+            <span style="width:22px;height:22px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:1.5px solid #fff;box-shadow:0 0 0 1px #e8e7e3;margin-left:-8px" title="개인 · Gmail · me@gmail.com">P</span>
+            <span style="flex:1"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </div>
+
+          <!-- overdue summary -->
+          <div style="margin:8px 12px 0;display:flex;align-items:center;gap:9px;background:#FBFAF8;border:1px solid #F0EFEC;border-radius:12px;padding:9px 12px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B08363" stroke-width="1.9" stroke-linecap="round"><path d="M12 8v5"/><circle cx="12" cy="12" r="9"/><path d="M12 16.5v.01"/></svg>
+            <span style="font-size:12.5px;font-weight:600;color:#67665f;flex:1">지난 미완료 <span style="color:#B08363">2</span></span>
+            <span style="font-size:11px;font-weight:600;color:#94938f">펼치기</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+
+          <!-- TODAY section -->
+          <div style="display:flex;align-items:center;gap:8px;padding:16px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">오늘</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">4</span>
+          </div>
+
+          <!-- task 1 -->
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">PRD v0.3 검토 코멘트 정리</div>
+                <div style="font-size:12.5px;font-weight:500;color:#a6a5a1;margin-top:3px;line-height:1.4">§6 하루 뷰 관련 피드백 취합</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#c4c3bf" stroke-width="1.7"/></svg>
+                  <div style="width:56px;height:5px;border-radius:3px;background:#EAE9E5;overflow:hidden"><div style="width:66%;height:100%;background:#1b1b1a;border-radius:3px"></div></div>
+                  <span style="font-size:10.5px;font-weight:700;color:#bdbcb8">2/3</span>
+                  <span style="flex:1"></span>
+                  <span style="font-size:11px;font-weight:700;color:#1b1b1a;background:#F1F0ED;padding:2px 8px;border-radius:7px">오늘</span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- task 2 -->
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">디자인 목업 팀에 공유</div>
+                <div style="display:flex;align-items:center;gap:9px;margin-top:9px">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a7 7 0 0 1-7 7H8l-4 2 1-4a7 7 0 1 1 15-5z"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></svg>
+                  <span style="flex:1"></span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- task 3 -->
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">장보기 — 우유, 커피 원두</div>
+                <div style="display:flex;align-items:center;gap:9px;margin-top:9px">
+                  <span style="font-size:11px;font-weight:600;color:#B08363;background:#F7F1EC;padding:2px 8px;border-radius:7px">저녁</span>
+                  <span style="flex:1"></span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- task 4 done -->
+          <div style="margin:0 12px 8px;background:#FBFBFA;border:1px solid #F3F2EF;border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="10" fill="#141413"/><path d="M7.5 12.2l3 3 6-6.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35;color:#bdbcb8;text-decoration:line-through;text-decoration-color:#d4d3cf">헬스장 등록</div>
+              </div>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none;opacity:.4" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+
+          <!-- no-due -->
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">기한 없음</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">3</span>
+          </div>
+          <div style="margin:0 12px 4px;padding:2px 4px">
+            <div style="display:flex;gap:10px;align-items:center;padding:7px 9px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="8.5" stroke="#D4D3CF" stroke-width="1.6" stroke-dasharray="2.5 2.8"/></svg>
+              <span style="font-size:13.5px;font-weight:500;color:#5a5952;flex:1">Sparkle 자동 업데이트 조사</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;padding:7px 9px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="8.5" stroke="#D4D3CF" stroke-width="1.6" stroke-dasharray="2.5 2.8"/></svg>
+              <span style="font-size:13.5px;font-weight:500;color:#5a5952;flex:1">도서관 책 반납</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+
+          <!-- quick add + sync footer -->
+          <div style="padding:11px 15px 13px;border-top:1px solid #F0EFEC;display:flex;align-items:center;gap:10px;margin-top:6px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+            <span style="flex:1;font-size:13.5px;font-weight:500;color:#bdbcb8">할 일 추가…</span>
+            <div title="계정은 아바타로 · 탭해서 계정/리스트 변경" style="display:flex;align-items:center;gap:7px;background:#F4F3F0;border-radius:9px;padding:3px 9px 3px 4px;cursor:default">
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+              <span style="font-size:11.5px;font-weight:600;color:#6f6e68">업무 관련</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#b0afab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <span title="동기화됨 · 방금 (오후 2:32)" style="width:8px;height:8px;border-radius:50%;background:#7ba86b;cursor:default;flex:none"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- DARK EXPANDED ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">다크 · 확장 모드</span>
+        <div style="width:384px;background:#1D1D1F;border:1px solid rgba(255,255,255,.06);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.5),0 3px 10px rgba(20,20,20,.2);color:#F4F4F2">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#37373A"></span><span style="width:11px;height:11px;border-radius:50%;background:#37373A"></span><span style="width:11px;height:11px;border-radius:50%;background:#37373A"></span></div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#6f6f6a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+              <div title="창 모드" style="display:flex;background:#28282B;border-radius:8px;padding:2px">
+                <span style="font-size:10px;font-weight:600;color:#7d7d78;padding:3px 7px;border-radius:6px">미니</span>
+                <span style="font-size:10px;font-weight:600;color:#7d7d78;padding:3px 7px;border-radius:6px">컴팩트</span>
+                <span style="font-size:10px;font-weight:700;color:#F4F4F2;background:#3a3a3d;padding:3px 7px;border-radius:6px">확장</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 16px 14px">
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#28282B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a0a09a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></svg></div>
+            <div style="text-align:center">
+              <div style="font-size:17px;font-weight:700;letter-spacing:-.01em">7월 15일 <span style="color:#7d7d78;font-weight:600">화</span> <span style="font-size:11.5px;font-weight:700;color:#F4F4F2;background:#3a3a3d;padding:2px 8px;border-radius:7px;vertical-align:2px">오늘</span></div>
+            </div>
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#28282B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a0a09a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:0 15px 12px">
+            <div style="display:flex;align-items:center;gap:6px;background:#28282B;border-radius:9px;padding:5px 9px 5px 10px;font-size:12.5px;font-weight:600;color:#cfcfca">전체 계정<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7d7d78" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+            <span style="width:22px;height:22px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:1.5px solid #1D1D1F" title="업무 · Workspace · jun@company.com">J</span>
+            <span style="width:22px;height:22px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:1.5px solid #1D1D1F;margin-left:-8px" title="개인 · Gmail · me@gmail.com">P</span>
+            <span style="flex:1"></span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6f6f6a" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6f6f6a" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:2px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#7d7d78">오늘</span>
+            <span style="font-size:11px;font-weight:600;color:#565658">4</span>
+          </div>
+          <!-- dark task 1 -->
+          <div style="margin:0 12px 8px;background:#28282B;border:1px solid rgba(255,255,255,.04);border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#4d4d50" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#4d4d50" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">PRD v0.3 검토 코멘트 정리</div>
+                <div style="font-size:12.5px;font-weight:500;color:#84847e;margin-top:3px">§6 하루 뷰 관련 피드백 취합</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#5f5f62" stroke-width="1.7"/></svg>
+                  <div style="width:56px;height:5px;border-radius:3px;background:#3a3a3d;overflow:hidden"><div style="width:66%;height:100%;background:#F4F4F2;border-radius:3px"></div></div>
+                  <span style="font-size:10.5px;font-weight:700;color:#84847e">2/3</span>
+                  <span style="flex:1"></span>
+                  <span style="font-size:11px;font-weight:700;color:#F4F4F2;background:#3a3a3d;padding:2px 8px;border-radius:7px">오늘</span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- dark task 2 -->
+          <div style="margin:0 12px 8px;background:#28282B;border:1px solid rgba(255,255,255,.04);border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#4d4d50" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#4d4d50" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">장보기 — 우유, 커피 원두</div>
+                <div style="display:flex;align-items:center;gap:9px;margin-top:9px">
+                  <span style="font-size:11px;font-weight:600;color:#c99a78;background:#38302a;padding:2px 8px;border-radius:7px">저녁</span>
+                  <span style="flex:1"></span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- dark task done -->
+          <div style="margin:0 12px 8px;background:#212123;border:1px solid rgba(255,255,255,.03);border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="10" fill="#F4F4F2"/><path d="M7.5 12.2l3 3 6-6.2" stroke="#1D1D1F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;color:#65655f;text-decoration:line-through;text-decoration-color:#48484a">헬스장 등록</div></div>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none;opacity:.4" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+          <div style="padding:11px 15px 13px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6f6f6a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+            <span style="flex:1;font-size:13.5px;font-weight:500;color:#6f6f6a">할 일 추가…</span>
+            <div title="계정은 아바타로 · 탭해서 계정/리스트 변경" style="display:flex;align-items:center;gap:7px;background:#2c2c2f;border-radius:9px;padding:3px 9px 3px 4px;cursor:default">
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+              <span style="font-size:11.5px;font-weight:600;color:#b6b6b0">업무 관련</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6f6f6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <span title="동기화됨 · 방금 (오후 2:32)" style="width:8px;height:8px;border-radius:50%;background:#7ba86b;cursor:default;flex:none"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 02 LANG + COMPACT ================= -->
+  <section style="margin:0 0 56px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">02</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">언어 전환 · 컴팩트 모드</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">시스템 언어를 따르는 한/영 · 항상 떠 있는 얇은 스트립</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- ENGLISH -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">English (system locale)</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+              <div title="창 모드" style="display:flex;background:#F4F3F0;border-radius:8px;padding:2px">
+                <span style="font-size:10px;font-weight:600;color:#a6a5a1;padding:3px 7px;border-radius:6px">Mini</span>
+                <span style="font-size:10px;font-weight:600;color:#a6a5a1;padding:3px 7px;border-radius:6px">Compact</span>
+                <span style="font-size:10px;font-weight:700;color:#1b1b1a;background:#fff;padding:3px 7px;border-radius:6px;box-shadow:0 1px 2px rgba(20,20,20,.08)">Full</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 16px 14px">
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#F4F3F0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#67665f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></svg></div>
+            <div style="text-align:center">
+              <div style="font-size:17px;font-weight:700;letter-spacing:-.01em">Jul 15 <span style="color:#a6a5a1;font-weight:600">Wed</span> <span style="font-size:11.5px;font-weight:700;color:#1b1b1a;background:#F1F0ED;padding:2px 8px;border-radius:7px;vertical-align:2px">Today</span></div>
+            </div>
+            <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#F4F3F0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#67665f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:0 15px 12px">
+            <div style="display:flex;align-items:center;gap:6px;background:#F4F3F0;border-radius:9px;padding:5px 9px 5px 10px;font-size:12.5px;font-weight:600;color:#4b4a45">All accounts<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9b9b98" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+            <span style="flex:1"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:2px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">TODAY</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">3</span>
+          </div>
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">Ship review comments on PRD</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#c4c3bf" stroke-width="1.7"/></svg>
+                  <div style="width:56px;height:5px;border-radius:3px;background:#EAE9E5;overflow:hidden"><div style="width:66%;height:100%;background:#1b1b1a;border-radius:3px"></div></div>
+                  <span style="font-size:10.5px;font-weight:700;color:#bdbcb8">2/3</span>
+                  <span style="flex:1"></span>
+                  <span style="font-size:11px;font-weight:700;color:#1b1b1a;background:#F1F0ED;padding:2px 8px;border-radius:7px">Today</span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;line-height:1.35">Grocery run — milk, coffee</div></div>
+              <span style="font-size:11px;font-weight:600;color:#B08363;background:#F7F1EC;padding:2px 8px;border-radius:7px">Evening</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+          <div style="margin:0 12px 8px;background:#FBFBFA;border:1px solid #F3F2EF;border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="10" fill="#141413"/><path d="M7.5 12.2l3 3 6-6.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;color:#bdbcb8;text-decoration:line-through;text-decoration-color:#d4d3cf">Sign up for the gym</div></div>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none;opacity:.4" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+          <div style="padding:11px 15px 13px;border-top:1px solid #F0EFEC;display:flex;align-items:center;gap:10px;margin-top:6px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+            <span style="flex:1;font-size:13.5px;font-weight:500;color:#bdbcb8">Add a task…</span>
+            <div title="Account shown as avatar · tap to change account/list" style="display:flex;align-items:center;gap:7px;background:#F4F3F0;border-radius:9px;padding:3px 9px 3px 4px;cursor:default">
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+              <span style="font-size:11.5px;font-weight:600;color:#6f6e68">Work</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#b0afab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <span title="Synced · just now (2:32 PM)" style="width:8px;height:8px;border-radius:50%;background:#7ba86b;cursor:default;flex:none"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPACT STRIPS -->
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">미니 스트립 — 개수만</span>
+          <div style="width:320px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid rgba(20,20,20,.06);border-radius:16px;box-shadow:0 16px 40px -18px rgba(20,20,20,.34);padding:10px 13px;display:flex;align-items:center;gap:9px;color:#1b1b1a">
+            <div style="display:flex;gap:5px;flex:none"><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span></div>
+            <img src="taskocean-logo.png" alt="TaskOcean" style="height:12px;width:auto;display:block;flex:none">
+            <span style="font-size:13.5px;font-weight:700;flex:none">3 남음</span>
+            <span style="flex:1"></span>
+            <span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            <span style="width:16px;height:16px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            <span title="확장 모드로" style="font-size:10.5px;font-weight:700;color:#6f6e68;background:#F4F3F0;padding:3px 8px;border-radius:7px;cursor:pointer;flex:none">확장</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">컴팩트 스트립 — 제목만</span>
+          <div style="width:320px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid rgba(20,20,20,.06);border-radius:16px;box-shadow:0 16px 40px -18px rgba(20,20,20,.34);overflow:hidden;color:#1b1b1a">
+            <div style="display:flex;align-items:center;gap:9px;padding:9px 13px 8px;border-bottom:1px solid #F1F0ED">
+              <div style="display:flex;gap:5px;flex:none"><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span><span style="width:9px;height:9px;border-radius:50%;background:#E4E3DF"></span></div>
+              <span style="font-size:12px;font-weight:700;letter-spacing:.02em">오늘 · 화 15일</span>
+              <span style="flex:1"></span>
+              <span title="확장 모드로" style="font-size:10.5px;font-weight:700;color:#6f6e68;background:#F4F3F0;padding:3px 8px;border-radius:7px;cursor:pointer;flex:none">확장</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 14px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">PRD v0.3 검토 코멘트 정리</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 14px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">디자인 목업 팀에 공유</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 14px 11px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">장보기 — 우유, 커피 원두</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+        </div>
+        <div style="width:320px;font-size:11.5px;line-height:1.55;color:#94938f;padding-left:2px">화면 가장자리에 붙이면 얇은 스트립으로 축소 — 마우스가 없을 때 반투명으로 페이드해 방해를 최소화.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 03 QUICK CAPTURE + MENUBAR ================= -->
+  <section style="margin:0 0 56px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">03</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">퀵 캡처 · 메뉴바 팝오버</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">전역 단축키로 3초 안에 · 어디서든 접근</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- QUICK CAPTURE -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">전역 퀵 캡처 (⌥Space) — Spotlight 스타일</span>
+        <div style="width:560px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border:1px solid rgba(20,20,20,.06);border-radius:20px;overflow:hidden;box-shadow:0 32px 70px -24px rgba(20,20,20,.42),0 3px 12px rgba(20,20,20,.08);color:#1b1b1a">
+          <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+            <div style="flex:1;display:flex;align-items:center;font-size:21px;font-weight:600;letter-spacing:-.01em">회의 노트 정리<span style="display:inline-block;width:2px;height:24px;background:#1b1b1a;margin-left:3px;border-radius:1px"></span><span style="color:#B08363;font-weight:600;margin-left:8px">내일</span></div>
+            <span style="font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:600;color:#b4b3af">⏎</span>
+          </div>
+          <div style="height:1px;background:#F0EFEC;margin:0 22px"></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:13px 22px 15px">
+            <div style="display:flex;align-items:center;gap:8px;background:#F4F3F0;border-radius:10px;padding:4px 11px 4px 5px">
+              <span style="width:20px;height:20px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+              <span style="font-size:12.5px;font-weight:600;color:#4b4a45">업무 관련</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a6a5a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:#F7F1EC;border-radius:9px;padding:5px 10px">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B08363" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+              <span style="font-size:12px;font-weight:600;color:#9a6f52">내일 → 7.16 (수)</span>
+            </div>
+            <span style="flex:1"></span>
+            <span style="font-size:11.5px;font-weight:500;color:#b4b3af">⌘1–9 리스트 · <span style="font-family:ui-monospace,Menlo,monospace">esc</span> 취소</span>
+          </div>
+        </div>
+        <div style="width:560px;font-size:11.5px;line-height:1.55;color:#94938f;padding-left:2px">다른 앱에서 작업 중에도 전역 단축키 한 번 → 입력 → Enter. 자연어 마감일("내일")을 자동 파싱하고, 대상 계정·리스트를 키보드로 지정.</div>
+      </div>
+
+      <!-- MENUBAR POPOVER -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">메뉴바 팝오버</span>
+        <div style="width:300px;position:relative;filter:drop-shadow(0 22px 46px rgba(20,20,20,.3))">
+          <div style="position:absolute;top:-8px;right:44px;width:16px;height:16px;background:#fff;transform:rotate(45deg);border-top:1px solid rgba(20,20,20,.05);border-left:1px solid rgba(20,20,20,.05)"></div>
+          <div style="background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:16px;overflow:hidden;color:#1b1b1a;position:relative">
+            <div style="display:flex;align-items:center;gap:9px;padding:13px 15px 11px;border-bottom:1px solid #F1F0ED">
+              <img src="taskocean-logo.png" alt="TaskOcean" style="height:12px;width:auto;display:block;flex:none">
+              <span style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:16px;font-weight:700;letter-spacing:0">TaskOcean</span>
+              <span style="flex:1"></span>
+              <span style="font-size:11.5px;font-weight:600;color:#a6a5a1">3 · 오늘</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 15px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">PRD v0.3 검토 코멘트 정리</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 15px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">디자인 목업 팀에 공유</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 15px 11px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.7"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">장보기 — 우유, 커피 원두</span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 15px;border-top:1px solid #F1F0ED;background:#FBFAF8">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+              <span style="flex:1;font-size:13px;font-weight:500;color:#bdbcb8">빠른 추가…</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 15px;border-top:1px solid #F1F0ED">
+              <span style="font-size:12px;font-weight:600;color:#5B7CA8">앱 열기</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 6.6 19.4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H2a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 3.6 6.6l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 2.7-1.1V2a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H22a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 04 MULTI-ACCOUNT + BACKLOG ================= -->
+  <section style="margin:0 0 56px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">04</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">멀티 계정 필터 · 기한없음 / 지난 미완료</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">여러 Google 계정을 한 화면에서 · 유실 없는 처리</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- FILTER STATE -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">계정·리스트 필터 (열림)</span>
+        <div style="width:384px;position:relative;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+          </div>
+          <div style="padding:2px 16px 12px;display:flex;align-items:center;gap:8px">
+            <div style="display:flex;align-items:center;gap:6px;background:#141413;border-radius:9px;padding:6px 10px 6px 11px;font-size:12.5px;font-weight:600;color:#fff">계정 · 리스트<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></div>
+            <span style="flex:1"></span>
+            <span style="font-size:11.5px;font-weight:600;color:#a6a5a1">4 표시 중</span>
+          </div>
+          <!-- filter panel -->
+          <div style="margin:0 12px 12px;border:1px solid #EEEDEA;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(20,20,20,.18)">
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 13px;background:#FBFAF8">
+              <span style="width:24px;height:24px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff" title="업무 · Workspace · jun@company.com">J</span>
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700">업무 · Workspace</div><div style="font-size:11px;font-weight:500;color:#a6a5a1">jun@company.com</div></div>
+              <div style="width:38px;height:22px;border-radius:11px;background:#141413;position:relative"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:#fff"></span></div>
+            </div>
+            <div style="padding:4px 13px 10px">
+              <div style="display:flex;align-items:center;gap:9px;padding:6px 4px 6px 34px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7ba86b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg><span style="font-size:12.5px;font-weight:500;flex:1">업무 관련</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18 10l-4-4L4 16v4z"/><path d="M13 5l4 4"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg><span style="font-size:11px;color:#c4c3bf">6</span></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:6px 4px 6px 34px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7ba86b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg><span style="font-size:12.5px;font-weight:500;flex:1">디자인</span><span style="font-size:11px;color:#c4c3bf">3</span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 4px 4px 34px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B7CA8" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg><span style="font-size:12px;font-weight:600;color:#5B7CA8">리스트 추가</span></div>
+            </div>
+            <div style="height:1px;background:#F1F0ED"></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 13px">
+              <span style="width:24px;height:24px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff" title="개인 · Gmail · me@gmail.com">P</span>
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700">개인 · Gmail</div><div style="font-size:11px;font-weight:500;color:#a6a5a1">me@gmail.com</div></div>
+              <div style="width:38px;height:22px;border-radius:11px;background:#141413;position:relative"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:#fff"></span></div>
+            </div>
+            <div style="padding:4px 13px 6px">
+              <div style="display:flex;align-items:center;gap:9px;padding:6px 4px 6px 34px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7ba86b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg><span style="font-size:12.5px;font-weight:500;flex:1">장보기</span><span style="font-size:11px;color:#c4c3bf">4</span></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:6px 4px 6px 34px;opacity:.5"><span style="width:15px;height:15px;border-radius:4px;border:1.6px solid #c4c3bf"></span><span style="font-size:12.5px;font-weight:500;flex:1">나중에</span><span style="font-size:11px;color:#c4c3bf">2</span></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 4px 4px 34px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08363" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg><span style="font-size:12px;font-weight:600;color:#B08363">리스트 추가</span></div>
+            </div>
+          </div>
+          <div style="padding:0 16px 16px;display:flex;align-items:center;gap:7px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5B7CA8" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+            <span style="font-size:12.5px;font-weight:600;color:#5B7CA8">Google 계정 추가</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OVERDUE / NO-DUE -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">지난 미완료 이월 · 기한 없음</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+          </div>
+          <!-- overdue header -->
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 16px 8px">
+            <span style="width:16px;height:16px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#9a6f52">지난 미완료</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">2</span>
+          </div>
+          <div style="margin:0 12px 8px;background:#FBFAF8;border:1px solid #F0EBE6;border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4C4B5" stroke-width="1.6"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">인보이스 제출</div>
+                <div style="font-size:11.5px;font-weight:600;color:#B08363;margin-top:3px">7월 11일 마감 · 4일 지남</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+                  <span style="font-size:11.5px;font-weight:700;color:#fff;background:#141413;padding:4px 11px;border-radius:8px">오늘로 이월</span>
+                  <span style="font-size:11.5px;font-weight:600;color:#8d8c88;background:#F1F0ED;padding:4px 11px;border-radius:8px">날짜 유지</span>
+                  <span style="flex:1"></span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin:0 12px 8px;background:#FBFAF8;border:1px solid #F0EBE6;border-radius:15px;padding:12px 13px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4C4B5" stroke-width="1.6"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">API 스코프 검증 착수</div>
+                <div style="font-size:11.5px;font-weight:600;color:#B08363;margin-top:3px">7월 14일 마감 · 1일 지남</div>
+              </div>
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+          </div>
+          <!-- no due header -->
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">기한 없음</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">3</span>
+            <span style="flex:1"></span>
+            <span style="font-size:11px;font-weight:500;color:#b4b3af">하루 뷰에서 사라지지 않음</span>
+          </div>
+          <div style="margin:0 12px 6px;padding:2px 4px">
+            <div style="display:flex;gap:10px;align-items:center;padding:8px 9px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="8.5" stroke="#D4D3CF" stroke-width="1.6" stroke-dasharray="2.5 2.8"/></svg>
+              <span style="font-size:13.5px;font-weight:500;color:#5a5952;flex:1">Sparkle 자동 업데이트 조사</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;padding:8px 9px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="8.5" stroke="#D4D3CF" stroke-width="1.6" stroke-dasharray="2.5 2.8"/></svg>
+              <span style="font-size:13.5px;font-weight:500;color:#5a5952;flex:1">도서관 책 반납</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;padding:8px 9px 12px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="8.5" stroke="#D4D3CF" stroke-width="1.6" stroke-dasharray="2.5 2.8"/></svg>
+              <span style="font-size:13.5px;font-weight:500;color:#5a5952;flex:1">경비 정산 영수증 스캔</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 05 RE-AUTH + HEATMAP ================= -->
+  <section style="margin:0 0 56px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">05</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">재인증 격리 · 히트맵 조망</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">한 계정만 만료돼도 앱은 계속 · 넓은 기간은 밀도로</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- RE-AUTH -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">부분 만료 격리 — 회사 계정만 재로그인</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+          </div>
+          <!-- banner -->
+          <div style="margin:2px 12px 12px;background:#F5F0EA;border:1px solid #EADFD2;border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:11px">
+            <span style="width:26px;height:26px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex:none;position:relative">J<span style="position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:#B0806B;border:2px solid #F5F0EA;display:flex;align-items:center;justify-content:center"></span></span>
+            <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:#8a5f3f">업무 계정 재로그인 필요</div><div style="font-size:11.5px;font-weight:500;color:#a98a6f;margin-top:1px">개인 계정은 정상 동작 중</div></div>
+            <span style="font-size:12px;font-weight:700;color:#fff;background:#141413;padding:6px 12px;border-radius:9px;flex:none">다시 로그인</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:2px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">오늘</span>
+            <span style="font-size:11px;font-weight:600;color:#c9c8c4">3</span>
+          </div>
+          <!-- personal task normal -->
+          <div style="margin:0 12px 8px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600">장보기 — 우유, 커피 원두</div></div>
+              <span style="font-size:11px;font-weight:600;color:#B08363;background:#F7F1EC;padding:2px 8px;border-radius:7px">저녁</span>
+              <span style="width:18px;height:18px;border-radius:50%;background:#B08363;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="개인 · Gmail · me@gmail.com">P</span>
+            </div>
+          </div>
+          <!-- work tasks muted -->
+          <div style="margin:0 12px 8px;background:#FBFAF9;border:1px dashed #E3E2DE;border-radius:15px;padding:12px 13px;opacity:.85">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#DAD9D5" stroke-width="1.6"/><path d="M12 8.5v4M12 15v.01" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;color:#a6a5a1">PRD v0.3 검토 코멘트 정리</div></div>
+              <span style="font-size:10.5px;font-weight:600;color:#a98a6f;background:#F3EDE6;padding:3px 8px;border-radius:7px">재로그인 필요</span>
+            </div>
+          </div>
+          <div style="margin:0 12px 12px;background:#FBFAF9;border:1px dashed #E3E2DE;border-radius:15px;padding:12px 13px;opacity:.85">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#DAD9D5" stroke-width="1.6"/><path d="M12 8.5v4M12 15v.01" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;color:#a6a5a1">디자인 목업 팀에 공유</div></div>
+              <span style="font-size:10.5px;font-weight:600;color:#a98a6f;background:#F3EDE6;padding:3px 8px;border-radius:7px">재로그인 필요</span>
+            </div>
+          </div>
+          <div style="padding:11px 16px 13px;border-top:1px solid #F0EFEC;display:flex;align-items:center;gap:10px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+            <span style="flex:1;font-size:13.5px;font-weight:500;color:#bdbcb8">할 일 추가…</span>
+            <span title="변경 1건 대기 중 · 재인증 후 자동 반영" style="width:8px;height:8px;border-radius:50%;background:#d9b96a;cursor:default;flex:none"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HEATMAP -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">히트맵 — 월 밀도, 클릭해 이동</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px">
+            <div style="font-size:15px;font-weight:700;letter-spacing:-.01em">2026년 7월</div>
+            <div style="display:flex;background:#F4F3F0;border-radius:9px;padding:3px">
+              <span style="font-size:11.5px;font-weight:600;color:#a6a5a1;padding:4px 11px;border-radius:6px">주</span>
+              <span style="font-size:11.5px;font-weight:700;color:#1b1b1a;background:#fff;padding:4px 11px;border-radius:6px;box-shadow:0 1px 2px rgba(20,20,20,.08)">월</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0;padding:0 16px 4px">
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#c4c3bf;padding-bottom:6px">일</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#a6a5a1;padding-bottom:6px">월</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#a6a5a1;padding-bottom:6px">화</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#a6a5a1;padding-bottom:6px">수</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#a6a5a1;padding-bottom:6px">목</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#a6a5a1;padding-bottom:6px">금</span>
+            <span style="text-align:center;font-size:10.5px;font-weight:700;color:#c4c3bf;padding-bottom:6px">토</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:0 16px 16px">
+            <!-- week 1 (starts wed jul1) blanks -->
+            <span></span><span></span>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#b4b3af">1</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">2</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.30);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#67665f">3</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#b4b3af">4</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">5</span></div>
+            <!-- week 2 -->
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">6</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.30);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#67665f">7</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">8</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.50);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#eeedea">9</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">10</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.30);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#67665f">11</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">12</span></div>
+            <!-- week 3 -->
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">13</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">14</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.30);border:2px solid #141413;display:flex;align-items:flex-start;justify-content:flex-end;padding:4px 5px"><span style="font-size:10px;font-weight:800;color:#1b1b1a">15</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">16</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.78);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#f2f1ee">17</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">18</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">19</span></div>
+            <!-- week 4 -->
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">20</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.30);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#67665f">21</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">22</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.50);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:700;color:#eeedea">23</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">24</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:rgba(20,20,19,.14);display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#8d8c88">25</span></div>
+            <div style="aspect-ratio:1;border-radius:9px;background:#EFEEEB;display:flex;align-items:flex-start;justify-content:flex-end;padding:5px 6px"><span style="font-size:10px;font-weight:600;color:#c4c3bf">26</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:0 16px 16px">
+            <span style="font-size:11px;font-weight:500;color:#b4b3af">적음</span>
+            <span style="width:16px;height:12px;border-radius:4px;background:#EFEEEB"></span>
+            <span style="width:16px;height:12px;border-radius:4px;background:rgba(20,20,19,.14)"></span>
+            <span style="width:16px;height:12px;border-radius:4px;background:rgba(20,20,19,.30)"></span>
+            <span style="width:16px;height:12px;border-radius:4px;background:rgba(20,20,19,.50)"></span>
+            <span style="width:16px;height:12px;border-radius:4px;background:rgba(20,20,19,.78)"></span>
+            <span style="font-size:11px;font-weight:500;color:#b4b3af">많음</span>
+            <span style="flex:1"></span>
+            <span style="font-size:11px;font-weight:600;color:#5B7CA8">셀 클릭 → 이동</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 06 INTERACTION & STATES ================= -->
+  <section style="margin:0 0 20px">
+    <div style="display:flex;align-items:baseline;gap:11px;margin:0 0 22px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#141413">06</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:-.01em;color:#1b1b1a">인터랙션 · 상태</span>
+      <span style="font-size:12.5px;font-weight:500;color:#a6a5a1">우클릭 메뉴 · 추가/수정 모달 · 서브태스크 · 빈 상태</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
+
+      <!-- ---- EMPTY STATE ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">첫 실행 — 연결된 계정 없음</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+          </div>
+          <div style="padding:34px 34px 40px;display:flex;flex-direction:column;align-items:center;text-align:center">
+            <img src="taskocean-logo.png" alt="TaskOcean" style="height:30px;width:auto;display:block">
+            <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;margin-top:24px">연결된 계정이 없어요</div>
+            <div style="font-size:13px;font-weight:500;color:#94938f;margin-top:9px;line-height:1.55">Google 계정을 연결하면 모든 할 일이<br>이 작은 창에 하나로 모여요.</div>
+            <div style="display:flex;align-items:center;gap:9px;background:#141413;color:#fff;border-radius:11px;padding:11px 18px;margin-top:24px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+              <span style="font-size:13.5px;font-weight:700">Google 계정 연결</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;margin-top:18px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b4b3af" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              <span style="font-size:11px;font-weight:500;color:#b4b3af">토큰은 macOS Keychain에 안전하게 저장돼요</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- ADD / EDIT MODAL ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">할 일 수정 모달 — 추가도 같은 폼</span>
+        <div style="width:424px;background:rgba(28,28,28,.34);border-radius:22px;padding:22px 16px;box-shadow:0 24px 56px -22px rgba(20,20,20,.4)">
+          <div style="background:#fff;border-radius:18px;box-shadow:0 22px 46px -18px rgba(20,20,20,.36);overflow:hidden;color:#1b1b1a">
+            <div style="display:flex;align-items:center;padding:15px 16px 13px;border-bottom:1px solid #F1F0ED">
+              <span style="font-size:14.5px;font-weight:700;flex:1">할 일 수정</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </div>
+            <div style="padding:15px 16px 4px">
+              <div style="padding:5px 2px 2px;font-size:16px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center">PRD v0.3 검토 코멘트 정리<span style="display:inline-block;width:2px;height:18px;background:#1b1b1a;margin-left:2px;border-radius:1px"></span></div>
+              <div style="padding:3px 2px 2px;font-size:13.5px;font-weight:500;color:#b4b3af">설명 추가…</div>
+              <div style="height:1px;background:#F1F0ED;margin:11px 0 2px"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px">
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#a6a5a1;margin:0 0 6px 2px">계정</div>
+                  <div style="border:1px solid #E7E6E2;border-radius:11px;padding:8px 10px;display:flex;align-items:center;gap:8px">
+                    <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                    <span style="font-size:13px;font-weight:600;flex:1">업무</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0afab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#a6a5a1;margin:0 0 6px 2px">리스트</div>
+                  <div style="border:1px solid #E7E6E2;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px">
+                    <span style="font-size:13px;font-weight:600;flex:1">업무 관련</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0afab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:10px">
+                <div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#a6a5a1;margin:0 0 6px 2px">마감일</div>
+                <div style="border:1px solid #E7E6E2;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:8px">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+                  <span style="font-size:13px;font-weight:600;flex:1">7월 15일 (화)</span>
+                  <span style="font-size:11px;font-weight:600;color:#b4b3af">날짜만 · 시간 없음</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0afab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;margin-top:16px">
+                <span style="font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#a6a5a1">서브태스크</span>
+                <span style="font-size:10.5px;font-weight:600;color:#c9c8c4">2</span>
+                <span style="flex:1"></span>
+                <span style="font-size:10.5px;font-weight:500;color:#b4b3af">1단계까지</span>
+              </div>
+              <div style="margin-top:9px;padding-left:2px">
+                <div style="display:flex;align-items:center;gap:9px;padding:6px 0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="10" fill="#141413"/><path d="M7.5 12.2l3 3 6-6.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span style="font-size:13px;font-weight:500;color:#bdbcb8;text-decoration:line-through;text-decoration-color:#d4d3cf;flex:1">요구사항 목록 정리</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;padding:6px 0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/></svg>
+                  <span style="font-size:13px;font-weight:500;flex:1">리뷰 코멘트 취합</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;padding:7px 0 4px">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" style="flex:none"><path d="M12 6v12M6 12h12"/></svg>
+                  <span style="font-size:13px;font-weight:500;color:#b4b3af;flex:1">서브태스크 추가</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;padding:13px 16px;border-top:1px solid #F1F0ED;margin-top:8px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B0656B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>
+                <span style="font-size:12.5px;font-weight:600;color:#B0656B">삭제</span>
+              </div>
+              <span style="flex:1"></span>
+              <span style="font-size:13px;font-weight:600;color:#6f6e68;padding:8px 14px;border-radius:10px;background:#F4F3F0">취소</span>
+              <span style="font-size:13px;font-weight:700;color:#fff;padding:8px 18px;border-radius:10px;background:#141413;margin-left:8px">저장</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- CONTEXT MENU ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">태스크 우클릭 — 컨텍스트 메뉴</span>
+        <div style="width:384px;position:relative">
+          <!-- highlighted task card -->
+          <div style="background:#fff;border:1.5px solid #141413;border-radius:15px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">PRD v0.3 검토 코멘트 정리</div>
+                <div style="font-size:12.5px;font-weight:500;color:#a6a5a1;margin-top:3px">§6 하루 뷰 관련 피드백 취합</div>
+              </div>
+            </div>
+          </div>
+          <!-- floating menu -->
+          <div style="position:absolute;top:52px;left:120px;width:216px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:14px;box-shadow:0 20px 44px -14px rgba(20,20,20,.32),0 3px 10px rgba(20,20,20,.06);padding:6px;color:#3a3a37">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;background:#F4F3F0">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#67665f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18 10l-4-4L4 16v4z"/><path d="M13 5l4 4"/></svg>
+              <span style="font-size:13px;font-weight:600;flex:1">수정</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1">완료로 표시</span>
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;font-weight:600;color:#c4c3bf">⌘⏎</span>
+            </div>
+            <div style="height:1px;background:#F1F0ED;margin:5px 8px"></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1">리스트 이동</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v13M4 7l3-3 3 3M17 20V7M14 17l3 3 3-3"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1">계정 간 이동</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V5.5A2.5 2.5 0 0 1 7.5 3H16"/></svg>
+              <span style="font-size:13px;font-weight:500;flex:1">복제</span>
+            </div>
+            <div style="height:1px;background:#F1F0ED;margin:5px 8px"></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B0656B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>
+              <span style="font-size:13px;font-weight:600;flex:1;color:#B0656B">삭제</span>
+            </div>
+          </div>
+          <div style="height:150px"></div>
+        </div>
+      </div>
+
+      <!-- ---- SUBTASK EXPANDED ---- -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:11.5px;font-weight:600;color:#8d8c88;padding-left:2px">서브태스크 — 1단계 중첩 · 인라인 편집</span>
+        <div style="width:384px;background:#fff;border:1px solid rgba(20,20,20,.05);border-radius:22px;overflow:hidden;box-shadow:0 24px 56px -22px rgba(20,20,20,.34),0 3px 10px rgba(20,20,20,.05);color:#1b1b1a">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 15px">
+            <div style="display:flex;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span><span style="width:11px;height:11px;border-radius:50%;background:#E4E3DF"></span></div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3-1-5z"/><path d="M12 15.5V20"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 16px 8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;color:#a6a5a1">오늘</span>
+          </div>
+          <!-- parent card expanded -->
+          <div style="margin:0 12px 12px;background:#fff;border:1px solid #F1F0ED;border-radius:15px;padding:12px 13px 6px;box-shadow:0 1px 2px rgba(20,20,20,.05),0 7px 16px -9px rgba(20,20,20,.12)">
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px"><path d="M6 9l6 6 6-6" stroke="#9a9a96" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#D4D3CF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.35">PRD v0.3 검토 코멘트 정리</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:9px">
+                  <div style="width:56px;height:5px;border-radius:3px;background:#EAE9E5;overflow:hidden"><div style="width:33%;height:100%;background:#1b1b1a;border-radius:3px"></div></div>
+                  <span style="font-size:10.5px;font-weight:700;color:#bdbcb8">1/3</span>
+                  <span style="flex:1"></span>
+                  <span style="font-size:11px;font-weight:700;color:#1b1b1a;background:#F1F0ED;padding:2px 8px;border-radius:7px">오늘</span>
+                  <span style="width:18px;height:18px;border-radius:50%;background:#5B7CA8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex:none" title="업무 · Workspace · jun@company.com">J</span>
+                </div>
+              </div>
+            </div>
+            <!-- subtasks, indented with guide line -->
+            <div style="margin:10px 0 2px 9px;padding-left:16px;border-left:2px solid #F1F0ED">
+              <div style="display:flex;align-items:center;gap:9px;padding:5px 0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="10" fill="#141413"/><path d="M7.5 12.2l3 3 6-6.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:13px;font-weight:500;color:#bdbcb8;text-decoration:line-through;text-decoration-color:#d4d3cf">요구사항 목록 정리</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:5px 0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/></svg>
+                <span style="font-size:13px;font-weight:500;flex:1">리뷰 코멘트 취합<span style="display:inline-block;width:2px;height:15px;background:#1b1b1a;margin-left:2px;border-radius:1px;vertical-align:-2px"></span></span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:5px 0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#D4D3CF" stroke-width="1.6"/></svg>
+                <span style="font-size:13px;font-weight:500">반영 후 재검토 요청</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:6px 0 4px">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#c4c3bf" stroke-width="1.8" stroke-linecap="round" style="flex:none"><path d="M12 6v12M6 12h12"/></svg>
+                <span style="font-size:13px;font-weight:500;color:#b4b3af">서브태스크 추가</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</div>
+</x-dc>
+</body>
+</html>

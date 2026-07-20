@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- App Store 트랙 1차 타깃: App Sandbox 필수 (PRD §8.6) -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- Google Tasks API 통신용 아웃바운드만. server 엔타이틀먼트 금지 (CLAUDE.md §4) -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>
