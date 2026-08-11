@@ -606,3 +606,27 @@ IME로 타이핑 불가 → 검색어는 클립보드 `pbcopy` + ⌘V로 주입(
 
 **검증:** 창 열린 상태에서 `open`(=독 재열기 이벤트) 반복 → 창 수 1 유지(중복 없음, 동일 id).
 닫은 뒤 재열기도 1창. 실백엔드로도 정상.
+
+## A84. CI 자동 릴리즈 + 공증 + Homebrew Cask 파이프라인 (2026-08-11)
+**결정:** 태그(`vX.Y.Z`) 푸시로 Developer ID 서명·공증·DMG·GitHub Release·Homebrew Cask 갱신을
+자동화. 트랙 B(직접 배포)의 자동화. 상세: `docs/ci_release.md`.
+
+**임의 결정 사항:**
+- **트랙 선택:** Homebrew Cask는 직접 다운로드 가능한 서명·공증 산출물이 필요 → App Store(트랙 A)가
+  아닌 **Developer ID(트랙 B)** 를 자동화 대상으로 삼음. 두 트랙은 계속 공존.
+- **배포 포맷 = DMG (`hdiutil UDZO` + `/Applications` 심볼릭 링크).** 헤드리스 러너에서 `create-dmg`의
+  Finder 창 레이아웃 스크립팅은 불안정 → 장식 없는 견고한 DMG 채택(Homebrew는 외형 무관). DMG 자체도
+  Developer ID로 서명해 공증 티켓을 staple.
+- **탭 저장소 = `KingsFavor/homebrew-tap`**, 설치 경로 `kingsfavor/tap/taskocean`. Cask는 관례상
+  별도 저장소. `release.yml`의 `update-homebrew-tap` job이 `TAP_GITHUB_TOKEN`으로 push.
+  토큰 미설정 시 릴리즈는 성공, 탭 갱신만 스킵(비치명적).
+- **공증 인증:** 앱암호 대신 **App Store Connect API 키(.p8)** 사용(notarytool 권장).
+- **서명 방식:** pbxproj는 로컬용 Automatic 유지, CI만 `CODE_SIGN_STYLE=Manual` +
+  `Developer ID Application` 오버라이드(로컬 개발 무영향).
+- **공유 스킴 추가:** 헤드리스 CI에는 xcuserdata의 자동생성 스킴이 없으므로
+  `xcshareddata/xcschemes/TaskOcean.xcscheme`를 커밋(신규 필수 파일).
+- **버전 소스:** `MARKETING_VERSION`=태그, `CURRENT_PROJECT_VERSION`=GitHub run number(단조 증가).
+- 엔타이틀먼트 변경 없음(배포 파이프라인 한정, 앱 런타임 권한 무관 — CLAUDE.md §4 준수).
+
+**전제(사용자 수동 1회 설정):** GitHub Secrets 7종, `homebrew-tap` 저장소 생성, Developer ID
+인증서/ASC API 키 발급. 절차 전부 `docs/ci_release.md` §1–4.

@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Xcode build output
+build/
+DerivedData/
+*.xcarchive
+*.dmg
+*.zip
+
+# Xcode user state (schemes here are per-user; shared schemes live in xcshareddata)
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+
+# CI / signing secrets — never commit
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+ExportOptions-local.plist

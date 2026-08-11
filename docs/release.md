@@ -2,6 +2,10 @@
 
 번들 ID `com.dws.taskocean` · Team `4S9VPFZ465` (DWS(KR)) · 최소 macOS 14.0
 
+> **자동화:** Track B(Developer ID 직접 배포)는 GitHub Actions로 완전 자동화됨 —
+> 태그 `vX.Y.Z` 푸시 → 서명·공증·DMG·GitHub Release·Homebrew Cask 갱신.
+> 절차/시크릿/탭 설정은 **`docs/ci_release.md`** 참조. 아래는 수동/원리 설명용.
+
 ## 현재 상태 (샌드박스 호환 체크리스트)
 | 항목 | 상태 |
 |---|---|

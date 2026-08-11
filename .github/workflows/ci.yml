@@ -1,0 +1,38 @@
+name: CI
+
+# Fast sanity build on every push / PR to main. No signing, no secrets —
+# just proves the app still compiles. The signed+notarized path lives in release.yml.
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (unsigned)
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app || sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Build
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project TaskOcean.xcodeproj \
+            -scheme TaskOcean \
+            -configuration Release \
+            -destination "generic/platform=macOS" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
