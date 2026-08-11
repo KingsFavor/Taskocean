@@ -1,6 +1,10 @@
 import SwiftUI
 import AppKit
 
+/// Shared identity for the single main window (used by the scene id, the window's
+/// NSWindow.identifier, and the show/hide + reopen logic).
+enum MainWindow { static let id = "taskocean.main" }
+
 /// Bridges SwiftUI to the host `NSWindow` for "always-on-top" floating (PRD
 /// FR-1.1/1.6), opacity (FR-1.4), and position restore (FR-1.2).
 ///
@@ -109,6 +113,9 @@ private struct WindowConfigBridge: NSViewRepresentable {
     }
 
     private func apply(to window: NSWindow, view: TrackerView, coordinator: Coordinator) {
+        // Stable identity for the main window, independent of the per-mode frame
+        // autosave name (A77) — lets toggle/reopen logic find it reliably.
+        window.identifier = NSUserInterfaceItemIdentifier(MainWindow.id)
         applyModeSizing(window, view, coordinator)
 
         // Floating level keeps us above normal windows but below full-screen apps.

@@ -71,8 +71,8 @@ private struct MenuBarBody: View {
 
             Divider().overlay(theme.divider)
             Button {
-                NSApp.activate(ignoringOtherApps: true)
-                openWindow(id: "main")
+                openWindow(id: MainWindow.id)
+                AppServices.showMainWindow()
             } label: {
                 Text("menubar.openApp")
                     .font(.system(size: 12, weight: .semibold))

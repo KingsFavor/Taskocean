@@ -68,8 +68,7 @@ final class AppServices {
 
     /// Show/hide the main window without tearing it down (FR-5.4).
     static func toggleMainWindow() {
-        let mainWindows = NSApp.windows.filter { $0.frameAutosaveName == "TaskOcean.main" }
-        guard let window = mainWindows.first else {
+        guard let window = mainWindow() else {
             NSApp.activate(ignoringOtherApps: true)
             return
         }
@@ -79,6 +78,23 @@ final class AppServices {
             NSApp.activate(ignoringOtherApps: true)
             window.makeKeyAndOrderFront(nil)
         }
+    }
+
+    /// The single main window, by its stable identifier (survives the per-mode
+    /// frame-autosave renaming from A77).
+    static func mainWindow() -> NSWindow? {
+        NSApp.windows.first { $0.identifier?.rawValue == MainWindow.id }
+    }
+
+    /// Bring the existing main window forward (Dock reopen / menu "open") instead
+    /// of spawning a new one. Returns true if it handled an existing window.
+    @discardableResult
+    static func showMainWindow() -> Bool {
+        NSApp.activate(ignoringOtherApps: true)
+        guard let window = mainWindow() else { return false }
+        if window.isMiniaturized { window.deminiaturize(nil) }
+        window.makeKeyAndOrderFront(nil)
+        return true
     }
 
     // MARK: Dock badge (FR-4.2)

@@ -2,6 +2,8 @@ import SwiftUI
 
 @main
 struct TaskOceanApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+
     /// Real backend once the OAuth client ID is configured; mock otherwise.
     /// `TASKOCEAN_FORCE_MOCK=1` keeps the mock even when configured (UI dev).
     @State private var store = AppStore(repository: Self.makeRepository())
@@ -15,7 +17,10 @@ struct TaskOceanApp: App {
     }
 
     var body: some Scene {
-        WindowGroup(id: "main") {
+        // A single unique window (not WindowGroup): the Dock icon, the menu-bar
+        // "open", and `openWindow` all focus this one window instead of spawning
+        // duplicates. Reopen-when-hidden is handled by AppDelegate.
+        Window("TaskOcean", id: MainWindow.id) {
             RootView()
                 .environment(store)
                 .background(WindowConfigurator(store: store))
@@ -65,5 +70,16 @@ private struct PreferredLanguageModifier: ViewModifier {
 extension View {
     func preferredLanguage(_ language: LanguageOption) -> some View {
         modifier(PreferredLanguageModifier(language: language))
+    }
+}
+
+/// Handles the Dock-icon reopen so a click brings the existing window forward
+/// (or unhides it) instead of leaving the user without a window / opening a new one.
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag { return true }                    // a window is already visible — default is fine
+        // Unhide the existing window ourselves; if it truly no longer exists,
+        // let AppKit reopen the single `Window` scene.
+        return !AppServices.showMainWindow()
     }
 }

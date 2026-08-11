@@ -586,3 +586,23 @@ IME로 타이핑 불가 → 검색어는 클립보드 `pbcopy` + ⌘V로 주입(
 사용자가 이미 커스텀 지정한 경우(UserDefaults `hotkey.capture` 존재) 영향 없음. 컴팩트 addHint·
 설정 표기는 `HotKeyPreferences.capture.display` 동적이라 자동 반영. (design_reference/기존 문서의
 ⌥Space 표기는 이제 기본이 아님.)
+
+## A83. 독 아이콘 재열기 시 새 창 생성 문제 (2026-07-20, 사용자 보고)
+**증상:** 상단 독에서 앱 열기 → 기존 창으로 가지 않고 새 창이 열림.
+
+**원인:** `WindowGroup(id:"main")`은 다중 창을 허용 → 독 재열기 / 메뉴바 `openWindow(id:"main")`가
+매번 새 창 생성.
+
+**수정:**
+- 씬 `WindowGroup` → **`Window("TaskOcean", id: MainWindow.id)`** (단일 유니크 창, macOS 13+).
+  독/`openWindow`가 항상 이 하나의 창을 포커스.
+- `AppDelegate`(@NSApplicationDelegateAdaptor) `applicationShouldHandleReopen`: 보이는 창이
+  없으면 `AppServices.showMainWindow()`로 기존(숨김) 창을 앞으로, 정말 없을 때만 AppKit 기본 재열기.
+- 공유 식별자 `MainWindow.id = "taskocean.main"`. WindowConfigurator가 창에
+  `NSWindow.identifier` 부여.
+- **A77 부작용 동시 수정:** `toggleMainWindow()`가 `frameAutosaveName == "TaskOcean.main"`로
+  창을 찾았는데 A77에서 per-mode 이름(`TaskOcean.full` 등)으로 바꿔 **못 찾던** 버그 → 이제
+  `mainWindow()`가 `identifier == MainWindow.id`로 조회.
+
+**검증:** 창 열린 상태에서 `open`(=독 재열기 이벤트) 반복 → 창 수 1 유지(중복 없음, 동일 id).
+닫은 뒤 재열기도 1창. 실백엔드로도 정상.
