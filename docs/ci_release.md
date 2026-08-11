@@ -22,14 +22,15 @@
 
 | Secret | 내용 | 만드는 법 |
 |---|---|---|
-| `BUILD_CERTIFICATE_BASE64` | **Developer ID Application** 인증서(.p12)의 base64 | 아래 §2 |
-| `P12_PASSWORD` | 위 .p12 내보낼 때 지정한 암호 | §2 |
-| `KEYCHAIN_PASSWORD` | CI 임시 키체인 암호(아무 문자열) | 직접 생성 |
-| `AC_API_KEY_ID` | App Store Connect API Key ID | §3 |
-| `AC_API_ISSUER_ID` | App Store Connect Issuer ID | §3 |
-| `AC_API_KEY_BASE64` | API 키(.p8)의 base64 | §3 |
+| `MACOS_CERTIFICATE_BASE64` | **Developer ID Application** 인증서(.p12)의 base64 | 아래 §2 |
+| `MACOS_CERTIFICATE_PASSWORD` | 위 .p12 내보낼 때 지정한 암호 | §2 |
+| `MACOS_SIGN_IDENTITY` | 서명 ID 전체 문자열 `Developer ID Application: … (4S9VPFZ465)` | §2 |
+| `NOTARY_KEY_ID` | App Store Connect API Key ID | §3 |
+| `NOTARY_ISSUER_ID` | App Store Connect Issuer ID | §3 |
+| `NOTARY_KEY_BASE64` | API 키(.p8)의 base64 | §3 |
 | `TAP_GITHUB_TOKEN` | `KingsFavor/homebrew-tap` 쓰기 권한 PAT | §4 |
 
+> CI 임시 키체인 암호는 워크플로우가 런타임에 임의 생성하므로 별도 시크릿이 필요 없다.
 > `TAP_GITHUB_TOKEN`이 없으면 릴리즈는 정상 생성되고 **탭 갱신만 스킵**된다(로그에 안내).
 
 ---
@@ -40,9 +41,13 @@
 ```bash
 # Keychain Access에서 "Developer ID Application: ... (4S9VPFZ465)" 인증서를
 # 개인키와 함께 선택 → 우클릭 → "2개 항목 내보내기" → certificate.p12 저장 (암호 지정)
-# 그 암호가 P12_PASSWORD.
+# 그 암호가 MACOS_CERTIFICATE_PASSWORD.
 
-base64 -i certificate.p12 | pbcopy   # 클립보드 → BUILD_CERTIFICATE_BASE64 에 붙여넣기
+base64 -i certificate.p12 | pbcopy    # → MACOS_CERTIFICATE_BASE64
+
+# 서명 ID 전체 문자열(MACOS_SIGN_IDENTITY) 확인:
+security find-identity -v -p codesigning | grep "Developer ID Application"
+#   → 예: "Developer ID Application: Kwonwoo Lyu (4S9VPFZ465)"  (따옴표 안쪽만 등록)
 ```
 
 인증서가 없다면: [developer.apple.com](https://developer.apple.com/account/resources/certificates/list) →
@@ -54,11 +59,11 @@ notarytool는 앱암호 대신 API 키를 쓴다(권장).
 1. [App Store Connect → Users and Access → Integrations → App Store Connect API](https://appstoreconnect.apple.com/access/integrations/api)
 2. **Team Keys** 에서 키 생성. 역할은 **Developer**(또는 App Manager)면 공증 충분.
 3. 발급 시:
-   - **Key ID** → `AC_API_KEY_ID`
-   - 상단 **Issuer ID** → `AC_API_ISSUER_ID`
+   - **Key ID** → `NOTARY_KEY_ID`
+   - 상단 **Issuer ID** → `NOTARY_ISSUER_ID`
    - 다운로드되는 `AuthKey_XXXX.p8`(1회만!) → base64:
      ```bash
-     base64 -i AuthKey_XXXX.p8 | pbcopy   # → AC_API_KEY_BASE64
+     base64 -i AuthKey_XXXX.p8 | pbcopy   # → NOTARY_KEY_BASE64
      ```
 
 ## 4. Homebrew 탭 저장소 + PAT
