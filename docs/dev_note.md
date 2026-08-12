@@ -630,3 +630,13 @@ IME로 타이핑 불가 → 검색어는 클립보드 `pbcopy` + ⌘V로 주입(
 
 **전제(사용자 수동 1회 설정):** GitHub Secrets 7종, `homebrew-tap` 저장소 생성, Developer ID
 인증서/ASC API 키 발급. 절차 전부 `docs/ci_release.md` §1–4.
+
+## A85. 공개 레포용 문서 구조 정리 (2026-08-12)
+**결정:** 저장소가 public(`KingsFavor/Taskocean`)이 되면서 루트를 **사용자용**과 **개발용**으로 분리.
+- 루트 **`README.md` 신설(사용자용)** — 소개·스크린샷·기능·요구사항·Homebrew 설치·현재 상태.
+- 개발 문서 **`PRD.md`, `design_reference.html`을 `docs/`로 이동.** `docs/README.md` 인덱스 추가.
+- `CLAUDE.md`는 루트 유지(에이전트/작업 지침 — 루트에 있어야 함). 내부 경로 참조를 `docs/PRD.md`,
+  `docs/design_reference.html`로 갱신. `docs/brand_web_guide.md` 출처 표기도 동기화.
+
+**정직성 주의:** 현 빌드는 목업 데이터로 동작(실 Google 연동 개발 중, A_실백엔드 단계)이므로 README에
+"프리뷰 — 샘플 데이터" 상태를 명시. 실제보다 부풀린 주장 금지.

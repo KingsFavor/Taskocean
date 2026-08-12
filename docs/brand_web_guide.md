@@ -2,7 +2,7 @@
 
 > 이 문서는 TaskOcean 소개(마케팅) 웹사이트를 제작하기 위한 **단일 소스**다.
 > 카피·색·타이포·기능 설명·스크린샷 배치·해서는 안 되는 주장까지 여기서 가져다 쓴다.
-> 출처: `PRD.md`, `CLAUDE.md`, `design_reference.html`, `docs/dev_note.md`. 스크린샷: `docs/screenshots/{ko,en}/`.
+> 출처: `docs/PRD.md`, `CLAUDE.md`, `docs/design_reference.html`, `docs/dev_note.md`. 스크린샷: `docs/screenshots/{ko,en}/`.
 
 ---
 
