@@ -3,8 +3,13 @@ import SwiftUI
 /// App-level menu commands and their keyboard shortcuts (PRD FR-DAY-2, §8.3c ⌘R).
 struct AppCommands: Commands {
     let store: AppStore
+    let updates: UpdateChecker
 
     var body: some Commands {
+        // Standard macOS spot for a manual check — right under "About TaskOcean".
+        CommandGroup(after: .appInfo) {
+            Button { updates.checkForUpdatesInteractive() } label: { Text("cmd.checkUpdates") }
+        }
         CommandGroup(after: .toolbar) {
             Button { store.goToPreviousDay() } label: { Text("cmd.previousDay") }
                 .keyboardShortcut(.leftArrow, modifiers: [.command])

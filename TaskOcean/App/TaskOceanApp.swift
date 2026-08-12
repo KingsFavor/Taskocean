@@ -41,7 +41,7 @@ struct TaskOceanApp: App {
         // default size (WindowConfigurator), after which the drag size is the user's.
         .windowResizability(.contentMinSize)
         .defaultSize(width: 460, height: 640)
-        .commands { AppCommands(store: store) }
+        .commands { AppCommands(store: store, updates: updates) }
 
         // Menu bar presence (PRD FR-4.3). Popover shows today's tasks.
         MenuBarExtra {

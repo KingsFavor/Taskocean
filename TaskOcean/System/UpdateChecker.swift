@@ -76,6 +76,41 @@ final class UpdateChecker {
         Task { await performCheck(manual: true) }
     }
 
+    /// User-initiated "Check for Updates…" from the app menu. Because the user asked,
+    /// we give explicit feedback via a small result alert — this is expected here and
+    /// never shown for the automatic (unsolicited) launch check.
+    func checkForUpdatesInteractive() {
+        guard !isChecking else { return }
+        defaults.removeObject(forKey: Key.skipped)   // explicit check re-shows a skipped version
+        Task {
+            await performCheck(manual: true)
+            presentResultAlert()
+        }
+    }
+
+    private func presentResultAlert() {
+        let alert = NSAlert()
+        switch lastResult {
+        case .available(let v):
+            alert.messageText = AppLocale.string("update.alert.availableTitle", "A new version is available")
+            alert.informativeText = "\(AppLocale.string("update.available", "New version")) \(v)\n\(Self.brewUpgradeCommand)"
+            alert.addButton(withTitle: AppLocale.string("update.openRelease", "Open release page"))
+            alert.addButton(withTitle: AppLocale.string("update.alert.later", "Later"))
+            if alert.runModal() == .alertFirstButtonReturn { openReleasePage() }
+            return
+        case .upToDate:
+            alert.messageText = AppLocale.string("update.alert.upToDateTitle", "You're up to date")
+            alert.informativeText = "\(AppLocale.string("update.currentVersion", "Version")) \(currentVersion)"
+        case .failed:
+            alert.messageText = AppLocale.string("update.alert.failedTitle", "Couldn't check for updates")
+            alert.informativeText = AppLocale.string("update.alert.failedBody", "Please check your connection and try again.")
+        case .idle:
+            return
+        }
+        alert.addButton(withTitle: AppLocale.string("action.ok", "OK"))
+        alert.runModal()
+    }
+
     /// ✕ on the banner: skip this exact version so it never shows again.
     func dismissBanner() {
         if let latest = latestVersion { defaults.set(latest, forKey: Key.skipped) }
