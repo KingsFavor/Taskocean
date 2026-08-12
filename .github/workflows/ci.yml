@@ -17,13 +17,20 @@ concurrency:
 jobs:
   build:
     name: Build (unsigned)
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.app || sudo xcode-select -s /Applications/Xcode.app
+        run: |
+          set -euo pipefail
+          # Project is objectVersion 77 (Xcode 16+). Pick the newest installed Xcode.
+          LATEST=$(ls -d /Applications/Xcode_1[6-9]*.app /Applications/Xcode_2*.app 2>/dev/null | sort -V | tail -1 || true)
+          [ -z "$LATEST" ] && LATEST=$(ls -d /Applications/Xcode*.app | sort -V | tail -1)
+          echo "Using $LATEST"
+          sudo xcode-select -s "$LATEST"
+          xcodebuild -version
 
       - name: Build
         run: |
