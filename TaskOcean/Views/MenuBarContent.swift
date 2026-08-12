@@ -18,6 +18,7 @@ struct MenuBarContent: View {
 private struct MenuBarBody: View {
     let openWindow: OpenWindowAction
     @Environment(AppStore.self) private var store
+    @Environment(UpdateChecker.self) private var updates
     @Environment(\.theme) private var theme
     @State private var draft = ""
 
@@ -68,6 +69,29 @@ private struct MenuBarBody: View {
                     }
             }
             .padding(.horizontal, 12).padding(.vertical, 9)
+
+            // Quiet update row — appears only when a newer version is available
+            // (mirrors the day-view banner for mini/compact users). Opens the release.
+            if updates.isBannerVisible {
+                Divider().overlay(theme.divider)
+                Button {
+                    updates.openReleasePage()
+                } label: {
+                    HStack(spacing: 7) {
+                        Image(systemName: "sparkles")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(theme.syncOK)
+                        Text("\(AppLocale.string("update.available", "New version")) \(updates.latestVersion ?? "") · \(AppLocale.string("update.action", "Update"))")
+                            .font(.system(size: 12, weight: .semibold))
+                        Spacer(minLength: 0)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 12).padding(.vertical, 8)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(theme.textSecondary)
+                .help(Text(verbatim: UpdateChecker.brewUpgradeCommand))
+            }
 
             Divider().overlay(theme.divider)
             Button {

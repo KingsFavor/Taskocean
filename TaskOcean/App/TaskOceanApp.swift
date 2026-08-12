@@ -47,6 +47,7 @@ struct TaskOceanApp: App {
         MenuBarExtra {
             MenuBarContent()
                 .environment(store)
+                .environment(updates)
                 .preferredLanguage(store.language)
                 .id(store.language)   // rebuild on language switch (imperative strings/dates)
         } label: {
