@@ -3,11 +3,17 @@ import SwiftUI
 /// The full (확장) day view — the product's main surface (design section 01).
 struct DayView: View {
     @Environment(AppStore.self) private var store
+    @Environment(UpdateChecker.self) private var updates
     @Environment(\.theme) private var theme
 
     var body: some View {
         let content = store.dayContent
         VStack(spacing: 0) {
+            // Quiet, dismissible "new version" strip — only the full view shows it
+            // (mini/compact stay minimal by design; Settings always carries it too).
+            if updates.isBannerVisible {
+                UpdateBanner()
+            }
             // Header zone (date + account + progress) — tinted panel so it reads
             // as separated from the task area below.
             VStack(spacing: 0) {

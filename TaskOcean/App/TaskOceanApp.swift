@@ -8,6 +8,9 @@ struct TaskOceanApp: App {
     /// `TASKOCEAN_FORCE_MOCK=1` keeps the mock even when configured (UI dev).
     @State private var store = AppStore(repository: Self.makeRepository())
 
+    /// Quiet "new version available" check (Homebrew/Developer ID build).
+    @State private var updates = UpdateChecker()
+
     private static func makeRepository() -> TaskRepository {
         let forceMock = ProcessInfo.processInfo.environment["TASKOCEAN_FORCE_MOCK"] == "1"
         if GoogleOAuthConfig.isConfigured && !forceMock {
@@ -23,9 +26,13 @@ struct TaskOceanApp: App {
         Window("TaskOcean", id: MainWindow.id) {
             RootView()
                 .environment(store)
+                .environment(updates)
                 .background(WindowConfigurator(store: store))
                 .preferredLanguage(store.language)
-                .task { AppServices.shared.start(store: store) }
+                .task {
+                    AppServices.shared.start(store: store)
+                    updates.checkOnLaunch()
+                }
         }
         .windowStyle(.hiddenTitleBar)
         // Content sets the *minimum* size (so a mode can't be crushed below its
@@ -50,6 +57,7 @@ struct TaskOceanApp: App {
         Settings {
             SettingsView()
                 .environment(store)
+                .environment(updates)
                 .preferredLanguage(store.language)
         }
     }

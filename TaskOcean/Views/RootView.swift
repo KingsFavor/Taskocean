@@ -256,6 +256,54 @@ struct CompactTaskRow: View, Equatable {
     }
 }
 
+// MARK: - Update banner (quiet "new version available" strip)
+
+/// Slim, single-line, dismissible. Tapping the label opens the release page;
+/// ✕ skips this version so it never nags again. Never steals focus (no modal).
+struct UpdateBanner: View {
+    @Environment(UpdateChecker.self) private var updates
+    @Environment(\.theme) private var theme
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(theme.syncOK)
+            Button {
+                updates.openReleasePage()
+            } label: {
+                HStack(spacing: 5) {
+                    Text("\(AppLocale.string("update.available", "New version")) \(updates.latestVersion ?? "")")
+                        .font(.system(size: 11.5, weight: .semibold))
+                        .foregroundStyle(theme.textSecondary)
+                    Text("update.action")
+                        .font(.system(size: 11.5, weight: .bold))
+                        .foregroundStyle(theme.syncOK)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help(Text(verbatim: UpdateChecker.brewUpgradeCommand))   // brew hint on hover
+
+            Spacer(minLength: 0)
+
+            Button {
+                updates.dismissBanner()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundStyle(theme.iconMuted)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help(Text("update.dismiss"))
+        }
+        .padding(.horizontal, 14).padding(.vertical, 7)
+        .background(theme.infoSurface)
+        .overlay(alignment: .bottom) { Rectangle().fill(theme.divider).frame(height: 1) }
+    }
+}
+
 // MARK: - Re-auth banner (design section 05)
 
 struct ReauthBanner: View {

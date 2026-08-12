@@ -43,7 +43,19 @@ brew tap kingsfavor/tap
 brew install --cask taskocean
 ```
 
-업데이트는 `brew upgrade --cask taskocean`.
+## 업데이트
+
+새 버전이 나오면 앱이 **조용히 알려줍니다** — 하루 한 번만 확인하고, 팝업으로 방해하지 않습니다.
+새 버전이 있을 때만 창 상단에 얇은 안내 줄이 뜨고(✕로 닫으면 그 버전은 다시 뜨지 않음),
+*설정 › 일반 › 업데이트*에서 현재 버전 확인·수동 확인·자동 확인 끄기를 할 수 있습니다.
+
+업데이트 방법:
+
+```bash
+brew upgrade --cask taskocean
+```
+
+또는 [릴리스 페이지](https://github.com/KingsFavor/Taskocean/releases/latest)에서 최신 DMG를 받아 덮어쓰면 됩니다.
 
 ## 현재 상태 — 프리뷰
 

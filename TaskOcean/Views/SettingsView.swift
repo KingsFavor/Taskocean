@@ -34,10 +34,54 @@ private struct GeneralSettings: View {
                 get: { store.showCompleted }, set: { store.showCompleted = $0 }))
             Toggle("settings.groupByList", isOn: Binding(
                 get: { store.groupByList }, set: { store.groupByList = $0 }))
+            UpdateSettings()
         }
         .formStyle(.grouped)
         .onChange(of: launchAtLogin) { _, on in LaunchAtLogin.set(on) }
         .onAppear { launchAtLogin = LaunchAtLogin.isEnabled }
+    }
+}
+
+/// Updates section: current version, auto-check toggle, manual check + status.
+private struct UpdateSettings: View {
+    @Environment(UpdateChecker.self) private var updates
+
+    var body: some View {
+        Section {
+            LabeledContent("update.currentVersion") { Text(verbatim: updates.currentVersion) }
+            Toggle("update.autoCheck", isOn: Binding(
+                get: { updates.autoCheckEnabled }, set: { updates.autoCheckEnabled = $0 }))
+            HStack {
+                Button("update.checkNow") { updates.manualCheck() }
+                    .disabled(updates.isChecking)
+                if updates.isChecking { ProgressView().controlSize(.small) }
+                Spacer()
+                statusLabel
+            }
+            if case .available = updates.lastResult {
+                Button("update.openRelease") { updates.openReleasePage() }
+            }
+        } header: {
+            Text("update.section")
+        } footer: {
+            Text("update.footer")
+                .font(.system(size: 11))
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder private var statusLabel: some View {
+        switch updates.lastResult {
+        case .idle:
+            EmptyView()
+        case .upToDate:
+            Text("update.upToDate").foregroundStyle(.secondary)
+        case .available(let v):
+            Text(verbatim: "\(AppLocale.string("update.available", "New version")) \(v)")
+                .foregroundStyle(.secondary)
+        case .failed:
+            Text("update.checkFailed").foregroundStyle(.secondary)
+        }
     }
 }
 
