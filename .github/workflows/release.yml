@@ -172,6 +172,8 @@ jobs:
           } > "$NOTES"
           if gh release view "v$VERSION" >/dev/null 2>&1; then
             gh release upload "v$VERSION" "$DMG" --clobber
+            # Refresh notes too so the recorded SHA matches the re-uploaded DMG.
+            gh release edit "v$VERSION" --notes-file "$NOTES"
           else
             gh release create "v$VERSION" "$DMG" \
               --title "TaskOcean $VERSION" \
