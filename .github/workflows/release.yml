@@ -166,7 +166,21 @@ jobs:
           SHA=$(cat "$RUNNER_TEMP/sha256.txt")
           NOTES="$RUNNER_TEMP/notes.md"
           {
-            echo "Notarized Developer ID build."
+            echo "### 설치 / Install (Homebrew)"
+            echo '```bash'
+            echo "brew install --cask kingsfavor/tap/taskocean"
+            echo '```'
+            echo ""
+            echo "### 업데이트 / Update"
+            echo "**Homebrew로 설치한 경우 / If installed via Homebrew:**"
+            echo '```bash'
+            echo "brew update && brew upgrade --cask taskocean"
+            echo '```'
+            echo "그 밖에는 아래 \`TaskOcean-${VERSION}.dmg\`를 받아 \`/Applications\`의 앱을 덮어쓰세요."
+            echo "Otherwise download \`TaskOcean-${VERSION}.dmg\` below and replace the app in \`/Applications\`."
+            echo ""
+            echo "---"
+            echo "Notarized Developer ID build · macOS 14+"
             echo ""
             echo "**SHA-256:** \`$SHA\`"
           } > "$NOTES"
