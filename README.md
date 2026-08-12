@@ -60,6 +60,32 @@ brew update && brew upgrade --cask taskocean
 
 또는 [릴리스 페이지](https://github.com/KingsFavor/Taskocean/releases/latest)에서 최신 DMG를 받아 덮어쓰면 됩니다.
 
+## 삭제
+
+Homebrew로 설치했다면:
+
+```bash
+brew uninstall --cask taskocean
+```
+
+설정·캐시 등 **남은 데이터까지 함께 지우려면** `--zap`을 붙이세요:
+
+```bash
+brew uninstall --zap --cask taskocean
+```
+
+DMG로 직접 설치했다면 `/Applications`의 **TaskOcean.app을 휴지통으로** 옮기면 됩니다.
+데이터까지 지우려면 아래 경로도 삭제하세요:
+
+```bash
+rm -rf ~/Library/Application\ Support/com.dws.taskocean \
+       ~/Library/Caches/com.dws.taskocean \
+       ~/Library/HTTPStorages/com.dws.taskocean \
+       ~/Library/Preferences/com.dws.taskocean.plist
+```
+
+> 로그인 항목(자동 실행)은 앱을 지우면 macOS가 자동 정리합니다.
+
 ## 현재 상태 — 프리뷰
 
 > ⚠️ 지금 빌드는 **샘플(목업) 데이터**로 UI가 동작합니다. 실제 Google Tasks 계정 연동·동기화는 **개발 중**입니다.
