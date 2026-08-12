@@ -65,7 +65,10 @@ private struct UpdateSettings: View {
                 statusLabel
             }
             if case .available = updates.lastResult {
-                Button("update.openRelease") { updates.openReleasePage() }
+                HStack {
+                    Button("update.copyCommand") { updates.copyUpdateCommand() }
+                    Button("update.openRelease") { updates.openReleasePage() }
+                }
             }
         } header: {
             Text("update.section")

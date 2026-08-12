@@ -683,3 +683,12 @@ Release여도 `/Applications/` 밖에서 실행 시 true. 배포판만 false.
 
 **주의:** 배지는 재빌드/재설치 후 나타남. 개발 copy를 Xcode에서 다시 실행하면 즉시 DEV 표시 → Homebrew copy와
 구분됨(배포판은 원래 배지 없음). Homebrew copy의 "배포판" 채널 라인까지 반영하려면 다음 릴리스 설치 필요.
+
+## A88. 수동 업데이트 확인 피드백 + 명령어 복사 (2026-08-12, 사용자 요청)
+앱 메뉴 "업데이트 확인…"(A86, macOS 표준 = 첫 메뉴 About 아래)의 결과 피드백 강화:
+- **결과 알림**(사용자 주도 시에만): 최신=버전 표시, 새 버전=`현재 → 신규` + brew 명령, 실패=안내.
+  새 버전 알림 버튼: **[명령어 복사](기본)** / [릴리스 열기] / [나중에].
+- **복사 명령어에 `brew update` 포함** → `brew update && brew upgrade --cask taskocean`
+  (`brew update` 없이는 Homebrew가 새 cask 버전을 모름). 상수 `brewUpgradeCommand`→`brewUpdateCommand`로 개명.
+- 복사 창구: 알림 버튼 + 설정 › 일반(새 버전 시 [명령어 복사]) + 배너(복사 아이콘·우클릭) + 메뉴바 줄(우클릭).
+- 키 `update.copyCommand` 추가. README 업데이트 섹션에 메뉴·복사 안내 반영.

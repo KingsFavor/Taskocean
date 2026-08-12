@@ -2734,6 +2734,23 @@
         }
       }
     },
+    "update.copyCommand": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy command"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령어 복사"
+          }
+        }
+      }
+    },
     "update.currentVersion": {
       "extractionState": "manual",
       "localizations": {

@@ -285,9 +285,21 @@ struct UpdateBanner: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help(Text(verbatim: UpdateChecker.brewUpgradeCommand))   // brew hint on hover
+            .help(Text(verbatim: UpdateChecker.brewUpdateCommand))   // brew hint on hover
 
             Spacer(minLength: 0)
+
+            // Copy the brew command inline (also available via right-click).
+            Button {
+                updates.copyUpdateCommand()
+            } label: {
+                Image(systemName: "doc.on.doc")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(theme.iconMuted)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help(Text("update.copyCommand"))
 
             Button {
                 updates.dismissBanner()
@@ -303,6 +315,10 @@ struct UpdateBanner: View {
         .padding(.horizontal, 14).padding(.vertical, 7)
         .background(theme.infoSurface)
         .overlay(alignment: .bottom) { Rectangle().fill(theme.divider).frame(height: 1) }
+        .contextMenu {
+            Button("update.copyCommand") { updates.copyUpdateCommand() }
+            Button("update.openRelease") { updates.openReleasePage() }
+        }
     }
 }
 

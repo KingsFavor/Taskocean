@@ -49,10 +49,13 @@ brew install --cask taskocean
 새 버전이 있을 때만 창 상단에 얇은 안내 줄이 뜨고(✕로 닫으면 그 버전은 다시 뜨지 않음),
 *설정 › 일반 › 업데이트*에서 현재 버전 확인·수동 확인·자동 확인 끄기를 할 수 있습니다.
 
+언제든 직접 확인하려면 **메뉴 막대 › TaskOcean › 업데이트 확인…** 을 누르세요. 최신 여부를 알려주고,
+새 버전이 있으면 **업데이트 명령어를 클립보드로 복사**할 수 있습니다.
+
 업데이트 방법:
 
 ```bash
-brew upgrade --cask taskocean
+brew update && brew upgrade --cask taskocean
 ```
 
 또는 [릴리스 페이지](https://github.com/KingsFavor/Taskocean/releases/latest)에서 최신 DMG를 받아 덮어쓰면 됩니다.

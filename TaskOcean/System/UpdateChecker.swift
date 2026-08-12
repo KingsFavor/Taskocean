@@ -19,7 +19,9 @@ import SwiftUI
 @Observable
 final class UpdateChecker {
     static let latestReleaseAPI = URL(string: "https://api.github.com/repos/KingsFavor/Taskocean/releases/latest")!
-    static let brewUpgradeCommand = "brew upgrade --cask taskocean"
+    /// The full update command — `brew update` first so Homebrew learns about the new
+    /// cask version, then the upgrade. This is what the "Copy command" action copies.
+    static let brewUpdateCommand = "brew update && brew upgrade --cask taskocean"
     private static let throttle: TimeInterval = 60 * 60 * 24   // once per day
 
     /// The running app version, e.g. "0.1.0".
@@ -92,11 +94,16 @@ final class UpdateChecker {
         let alert = NSAlert()
         switch lastResult {
         case .available(let v):
-            alert.messageText = AppLocale.string("update.alert.availableTitle", "A new version is available")
-            alert.informativeText = "\(AppLocale.string("update.available", "New version")) \(v)\n\(Self.brewUpgradeCommand)"
+            alert.messageText = "\(AppLocale.string("update.alert.availableTitle", "A new version is available")) (\(v))"
+            alert.informativeText = "\(AppLocale.string("update.currentVersion", "Version")) \(currentVersion) → \(v)\n\n\(Self.brewUpdateCommand)"
+            alert.addButton(withTitle: AppLocale.string("update.copyCommand", "Copy command"))   // default
             alert.addButton(withTitle: AppLocale.string("update.openRelease", "Open release page"))
             alert.addButton(withTitle: AppLocale.string("update.alert.later", "Later"))
-            if alert.runModal() == .alertFirstButtonReturn { openReleasePage() }
+            switch alert.runModal() {
+            case .alertFirstButtonReturn:  copyUpdateCommand()
+            case .alertSecondButtonReturn: openReleasePage()
+            default: break
+            }
             return
         case .upToDate:
             alert.messageText = AppLocale.string("update.alert.upToDateTitle", "You're up to date")
@@ -118,6 +125,13 @@ final class UpdateChecker {
 
     func openReleasePage() {
         if let url = releaseURL { NSWorkspace.shared.open(url) }
+    }
+
+    /// Copy the `brew update && brew upgrade` command to the clipboard.
+    func copyUpdateCommand() {
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.setString(Self.brewUpdateCommand, forType: .string)
     }
 
     // MARK: Internal

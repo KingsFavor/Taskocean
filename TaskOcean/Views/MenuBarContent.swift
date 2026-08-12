@@ -91,7 +91,11 @@ private struct MenuBarBody: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(theme.textSecondary)
-                .help(Text(verbatim: UpdateChecker.brewUpgradeCommand))
+                .help(Text(verbatim: UpdateChecker.brewUpdateCommand))
+                .contextMenu {
+                    Button("update.copyCommand") { updates.copyUpdateCommand() }
+                    Button("update.openRelease") { updates.openReleasePage() }
+                }
             }
 
             Divider().overlay(theme.divider)
