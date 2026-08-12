@@ -11,6 +11,7 @@ struct WindowChrome: View {
             // Real traffic lights live top-left (hidden titlebar); leave room.
             Spacer(minLength: 0)
             HStack(spacing: 10) {
+                DevBadge()
                 Button {
                     store.alwaysOnTop.toggle()
                 } label: {

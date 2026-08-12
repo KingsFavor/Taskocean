@@ -51,7 +51,9 @@ struct TaskOceanApp: App {
                 .preferredLanguage(store.language)
                 .id(store.language)   // rebuild on language switch (imperative strings/dates)
         } label: {
-            Image(systemName: "fish")
+            // Dev builds show the filled fish so two menu-bar icons (Homebrew +
+            // Xcode) are tellable apart at a glance; the shipped build stays outline.
+            Image(systemName: BuildInfo.isDevelopment ? "fish.fill" : "fish")
         }
         .menuBarExtraStyle(.window)
 

@@ -81,6 +81,7 @@ struct MiniStrip: View {
                         .font(.system(size: 13.5, weight: .bold))
                         .foregroundStyle(theme.textPrimary)
                     Spacer(minLength: 0)
+                    DevBadge()
                     AccountAvatarStack(accounts: store.accounts, size: 16)
                     WindowModePicker()
                 }
@@ -120,6 +121,7 @@ struct CompactStrip: View {
                     .font(.system(size: 12, weight: .bold))
                     .foregroundStyle(theme.textPrimary)
                 Spacer(minLength: 0)
+                DevBadge()
                 WindowModePicker()
             }
             .padding(.horizontal, 13).padding(.top, 9).padding(.bottom, 8)

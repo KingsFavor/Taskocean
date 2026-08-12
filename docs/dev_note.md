@@ -668,3 +668,18 @@ IME로 타이핑 불가 → 검색어는 클립보드 `pbcopy` + ⌘V로 주입(
 **사용자가 직접 누른** 수동 확인은 결과 피드백(작은 `NSAlert`: 최신/새 버전+brew 명령·릴리스 열기/확인 실패)을
 주는 것이 오히려 좋은 UX — 클릭에 아무 반응 없는 게 더 나쁨. 모달은 사용자 요청에 대한 응답일 때만 사용.
 설정 › 일반의 인라인 "지금 확인"(무모달)은 그대로 유지. 키 `cmd.checkUpdates`, `action.ok`, `update.alert.*` 추가.
+
+## A87. 개발 빌드 vs 배포판 구분 표시 (2026-08-12, 사용자 요청)
+**문제:** Homebrew 배포판(Release·공증·/Applications)과 Xcode 개발 빌드(Debug)가 같은 번들 ID·이름·아이콘 →
+동시에 실행 시 어느 게 도는지 구분 불가.
+
+**해결 (`System/BuildInfo.swift`):** `isDevelopment` = `#if DEBUG`(개발 빌드에만 정의, Release는 미정의) 또는
+Release여도 `/Applications/` 밖에서 실행 시 true. 배포판만 false.
+- **개발 빌드에만 "DEV" 배지**(`DevBadge`, 앰버색 캡슐, hover 시 번들 경로 표시)를 창 크롬(확장)·미니·컴팩트
+  헤더·메뉴바 드롭다운 헤더에 표시. **배포판은 아무 표식 없음 → 엔드유저 무영향.**
+- **메뉴바 글리프**: 개발=`fish.fill`(채움), 배포=`fish`(외곽선) → 두 메뉴바 아이콘을 클릭 없이 구분.
+- **설정 › 일반**: 버전 `(빌드번호)` + DEV 배지, 채널 라인(개발/로컬 Release/배포판(Homebrew)).
+- 키 `build.channel*` 4개 추가. 엔타이틀먼트 변경 없음.
+
+**주의:** 배지는 재빌드/재설치 후 나타남. 개발 copy를 Xcode에서 다시 실행하면 즉시 DEV 표시 → Homebrew copy와
+구분됨(배포판은 원래 배지 없음). Homebrew copy의 "배포판" 채널 라인까지 반영하려면 다음 릴리스 설치 필요.

@@ -26,6 +26,7 @@ private struct MenuBarBody: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 8) {
                 Wordmark(logoHeight: 12, fontSize: 15)
+                DevBadge()
                 Spacer()
                 Text("menubar.todayCount \(store.remainingTodayCount)")
                     .font(.system(size: 11, weight: .semibold))

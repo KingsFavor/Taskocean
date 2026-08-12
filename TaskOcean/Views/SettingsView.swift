@@ -48,7 +48,13 @@ private struct UpdateSettings: View {
 
     var body: some View {
         Section {
-            LabeledContent("update.currentVersion") { Text(verbatim: updates.currentVersion) }
+            LabeledContent("update.currentVersion") {
+                HStack(spacing: 6) {
+                    Text(verbatim: "\(updates.currentVersion) (\(BuildInfo.build))")
+                    DevBadge()
+                }
+            }
+            LabeledContent("build.channel") { Text(LocalizedStringKey(BuildInfo.channelKey)) }
             Toggle("update.autoCheck", isOn: Binding(
                 get: { updates.autoCheckEnabled }, set: { updates.autoCheckEnabled = $0 }))
             HStack {
