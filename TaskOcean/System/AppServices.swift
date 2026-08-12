@@ -9,6 +9,7 @@ final class AppServices {
     private init() {}
 
     private var started = false
+    private let relauncher = UpdateRelauncher()
     private var quickCapture: QuickCaptureController?
     private var captureHotKeyID: UInt32?
     private var toggleHotKeyID: UInt32?
@@ -44,6 +45,7 @@ final class AppServices {
         updateDockBadge()
         rescheduleNotifications()
         startAutoFadeMonitor()
+        relauncher.start()   // auto-relaunch into a Homebrew-installed update (distribution only)
     }
 
     // MARK: Hotkeys (FR-5.1/5.4/5.7)

@@ -692,3 +692,18 @@ Release여도 `/Applications/` 밖에서 실행 시 true. 배포판만 false.
   (`brew update` 없이는 Homebrew가 새 cask 버전을 모름). 상수 `brewUpgradeCommand`→`brewUpdateCommand`로 개명.
 - 복사 창구: 알림 버튼 + 설정 › 일반(새 버전 시 [명령어 복사]) + 배너(복사 아이콘·우클릭) + 메뉴바 줄(우클릭).
 - 키 `update.copyCommand` 추가. README 업데이트 섹션에 메뉴·복사 안내 반영.
+
+## A89. Homebrew 업데이트 후 자동 재시작 (2026-08-12, 사용자 요청)
+**배경:** `brew upgrade`가 디스크 번들만 교체 → 실행 중 프로세스는 구버전 유지. 사용자가 "실행 중 자동
+재시작 OK"라고 함.
+
+**구현 (`System/UpdateRelauncher.swift`, `AppServices.start()`에서 기동):**
+- **감지:** `NSApplication.didBecomeActiveNotification`(폴링 없음 — 경량성) 시, **디스크의 Info.plist**에서
+  `CFBundleShortVersionString`을 직접 읽어(= Bundle.main 캐시 우회) 실행 버전보다 높으면 업데이트로 판단.
+- **재시작:** `NSWorkspace.openApplication`(새 인스턴스) **성공 시에만** `NSApp.terminate` → 샌드박스 안전,
+  실패 시 무해(구 copy 유지, 수동 재시작). 엔타이틀먼트 추가 없음.
+- **개발 빌드 제외**(`BuildInfo.isDevelopment`): Xcode 재빌드가 번들을 바꿔 무한 self-relaunch 방지 — 필수 게이트.
+
+**한계(정직):** Homebrew가 업그레이드 중 앱을 **종료시키면** 이 로직은 실행 안 됨(프로세스 사망) → 사용자가 다시
+열면 신버전. 즉 이 자동 재시작은 "앱이 살아있는 채로 번들만 교체된 경우"의 보완. 샌드박스 실제 동작은 배포 빌드
+실기기 검증 필요(빌드 그린은 확인).
