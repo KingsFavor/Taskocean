@@ -47,7 +47,12 @@ Google Tasks를 macOS 화면 위에 **항상 떠 있는 작은 창**으로 두�
 - 서명: Team `4S9VPFZ465` (DWS(KR)). 번들 ID `com.dws.taskocean`.
 
 ## 5. 지금 상태 / 다음
-- **현재:** UI 계층 **기능 완성**(목업 데이터). 디자인 01–06 전 상태 + PRD P0/P1 UI 구현·검증 완료(빌드 그린).
-  - 구현됨: 하루 뷰(지남/오늘/Inbox)·3창모드·항상위/투명도/자동페이드·멀티계정/필터/리스트CRUD·서브태스크·완료정리·계정간 이동·드래그 리오더·퀵캡처(NLP)·전역단축키(재설정)·키보드 내비·검색·히트맵·메뉴바·Dock배지·로컬알림·재인증 격리·한/영·로그인 자동실행.
-- **다음(실백엔드 단계):** `GoogleTasksRepository` 구현 → `MockTaskRepository` 스왑(`TaskOceanApp.swift` 한 줄). OAuth 발급은 `docs/oauth_setup.md`.
-- 진행 로그와 임의 결정(A1–A19)은 `docs/dev_note.md` 참조. 배포는 `docs/release.md`.
+- **현재:** **실백엔드(Google Tasks) 기본 동작.** `GoogleOAuthConfig.clientID`가 채워져 있어
+  `makeRepository()`가 `GoogleTasksRepository`를 반환한다(실 OAuth 로그인·낙관적 업데이트·내구성
+  outbox·90초 폴링·계정별 격리). `MockTaskRepository`는 clientID가 비었거나 `TASKOCEAN_FORCE_MOCK=1`일
+  때만 쓰는 폴백 — **엔드유저 빌드는 목업이 아니다.**
+  - 구현됨(UI): 하루 뷰(지남/오늘/Inbox)·3창모드·항상위/투명도/자동페이드·멀티계정/필터/리스트CRUD·서브태스크·완료정리·계정간 이동·드래그 리오더·퀵캡처(NLP)·전역단축키(재설정)·키보드 내비·검색·히트맵·메뉴바·Dock배지·로컬알림·재인증 격리·한/영·로그인 자동실행.
+  - 구현됨(백엔드, `TaskOcean/Sync/`): OAuth(PKCE)·토큰 키체인 격리·Tasks REST 전체·outbox 동기화.
+- **남은 것:** Google 검증(sensitive 스코프) 전까지 테스트 사용자 한정·리프레시 토큰 7일 만료(주 1회
+  재인증 배너 정상). 실계정 검증 항목은 `docs/oauth_setup.md` 하단 참조.
+- 진행 로그와 임의 결정(A1–)은 `docs/dev_note.md` 참조. 배포는 `docs/release.md`, CI는 `docs/ci_release.md`.

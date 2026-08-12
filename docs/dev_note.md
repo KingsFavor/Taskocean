@@ -707,3 +707,18 @@ Release여도 `/Applications/` 밖에서 실행 시 true. 배포판만 false.
 **한계(정직):** Homebrew가 업그레이드 중 앱을 **종료시키면** 이 로직은 실행 안 됨(프로세스 사망) → 사용자가 다시
 열면 신버전. 즉 이 자동 재시작은 "앱이 살아있는 채로 번들만 교체된 경우"의 보완. 샌드박스 실제 동작은 배포 빌드
 실기기 검증 필요(빌드 그린은 확인).
+
+## A90. 문서 오류 정정 — "목업" 아님, 실백엔드 기본 (2026-08-12, 사용자 지적)
+**오류:** README에 "프리뷰 — 샘플(목업) 데이터"라고 적었으나 **사실과 다름**. 코드 재분석 결과:
+- `GoogleOAuthConfig.clientID`가 **첫 커밋(f6d1def)부터 설정**됨 → `isConfigured == true` →
+  `makeRepository()`가 항상 `GoogleTasksRepository`(실백엔드) 반환. 엔드유저 빌드는 목업이 아님.
+- `Sync/` 전체 실제 구현(OAuth PKCE, 토큰 키체인 격리, Tasks REST CRUD/move/clear, outbox+폴링 병합).
+  스텁/`fatalError` 없음. FirstRunView "계정 연결" → 실제 `signIn()`.
+- 원인: CLAUDE.md §5의 "목업 데이터/다음=실백엔드" 낡은 서술을 **검증 없이** README로 옮김.
+
+**정정:** README "현재 상태—프리뷰" 삭제 → "Google 계정 연동"(실 Google Tasks·OAuth·키체인, 검증 전
+테스트 사용자 한정·7일 만료 caveat). CLAUDE.md §5·`TaskRepository.swift` 주석도 실상태로 갱신.
+**교훈:** 상태 주장은 문서(특히 오래된 CLAUDE.md 상태 섹션)가 아니라 **코드에서 검증**한다.
+
+**저장소 위생:** 추적되던 `.DS_Store` 3개(`.`, `docs/`, `docs/screenshots/`) `git rm --cached`로 추적 해제
+(.gitignore엔 이미 존재).

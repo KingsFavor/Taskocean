@@ -1,8 +1,9 @@
 import Foundation
 
 /// The single seam between UI and data. The UI depends ONLY on this protocol.
-/// Today: `MockTaskRepository` (in-memory). Later: `GoogleTasksRepository`
-/// (Keychain OAuth + outbox + polling). Swapping implementations must not touch views.
+/// Default: `GoogleTasksRepository` (Keychain OAuth + outbox + polling) once a
+/// client ID is configured — which it is. `MockTaskRepository` (in-memory) is the
+/// fallback when the client ID is empty or `TASKOCEAN_FORCE_MOCK=1`.
 ///
 /// All mutations are expressed as intents; a real backend applies them optimistically
 /// and reconciles against the server (PRD §8.3). The mock applies them immediately.
