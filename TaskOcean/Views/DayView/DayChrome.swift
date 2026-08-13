@@ -275,14 +275,32 @@ struct QuickAddFooter: View {
     }
 }
 
-/// The small ambient sync indicator (green dot = synced).
+/// The small ambient sync indicator: green = synced, amber = pending (queued in the
+/// outbox), red = error/conflict. Quiet by design — a color, never a blocking alert.
 struct SyncDot: View {
     @Environment(AppStore.self) private var store
     @Environment(\.theme) private var theme
     var body: some View {
+        let status = store.syncStatus
         Circle()
-            .fill(theme.syncOK)
+            .fill(color(for: status))
             .frame(width: 8, height: 8)
-            .help(Text("sync.synced"))
+            .help(Text(tooltip(for: status)))
+    }
+
+    private func color(for status: SyncState) -> Color {
+        switch status {
+        case .synced: theme.syncOK
+        case .pending: theme.syncPending
+        case .conflict, .error: theme.syncError
+        }
+    }
+
+    private func tooltip(for status: SyncState) -> LocalizedStringKey {
+        switch status {
+        case .synced: "sync.synced"
+        case .pending: "sync.pending"
+        case .conflict, .error: "sync.error"
+        }
     }
 }

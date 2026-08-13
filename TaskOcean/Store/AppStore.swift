@@ -216,6 +216,21 @@ final class AppStore {
         }.count
     }
 
+    /// Aggregate sync state for the ambient dot (FR-SYNC-8): error/conflict wins,
+    /// then pending (queued in the outbox), else synced. Quietly reflects reality
+    /// instead of always claiming "synced".
+    var syncStatus: SyncState {
+        var pending = false
+        for t in tasksSnapshot {
+            switch t.syncState {
+            case .error, .conflict: return .error
+            case .pending: pending = true
+            case .synced: break
+            }
+        }
+        return pending ? .pending : .synced
+    }
+
     /// Remaining (incomplete) count for the mini strip / dock badge.
     var remainingTodayCount: Int {
         let c = dayContent

@@ -722,3 +722,9 @@ Release여도 `/Applications/` 밖에서 실행 시 true. 배포판만 false.
 
 **저장소 위생:** 추적되던 `.DS_Store` 3개(`.`, `docs/`, `docs/screenshots/`) `git rm --cached`로 추적 해제
 (.gitignore엔 이미 존재).
+
+## A91. SyncDot이 실제 동기화 상태 반영 (2026-08-13, 소규모 개선)
+`SyncDot`이 `store`를 받고도 항상 초록(synced) 고정이었음 → outbox 상태를 무시(FR-SYNC-8 미충족).
+`AppStore.syncStatus`(집계: error/conflict > pending > synced) 추가 → 대기 시 앰버(`syncPending`),
+오류 시 빨강(`syncError`), 평시 초록. 툴팁도 상태별(`sync.synced/pending/error`, 기존 키 재사용). 목업은
+전부 synced라 초록 유지. 조용한 색 변화만(애니메이션 없음 — CLAUDE.md §1.5).
